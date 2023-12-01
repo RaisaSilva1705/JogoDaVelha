@@ -26,6 +26,19 @@ function cadastrarJogador(player){
     }
 }
 
+function ModoDeJogo(modoJogo){
+
+    if (modoJogo === 1){
+        document.getElementById("side-panel-1").style.visibility = 'visible';
+        document.getElementById("side-panel-2").style.visibility = 'visible';
+
+    }
+    if (modoJogo === 2){
+        document.getElementById("side-panel-1").style.visibility = 'visible';
+
+    }
+}
+
 /* Fazer a verificação do vencedor.
    Pode ocorrer vitória do jogador 1 ou 2, bem como empate.
    Incrementar contador do vencedor
