@@ -9,33 +9,42 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="side-panel-1">
-        <label for="player1" id="saida1">Jogador 1:</label>
-        <input type="text" id="player1" placeholder="Nome do Jogador 1">
-        <span id="player1-wins">Vitórias: 0</span>
-        <button onclick="cadastrarJogador(1)">Cadastrar</button>
+    <div class="modoDeJogo">
+        <button class="PvP" onclick="ModoDeJogo(1)">2 Jogadores</button>
+        <button class="PvC" onclick="ModoDeJogo(2)">VS Computador</button>
     </div>
 
-    <div id="game-board">
-        <div class="cell" onclick="cellClick(this)"></div>
-        <div class="cell" onclick="cellClick(this)"></div>
-        <div class="cell" onclick="cellClick(this)"></div>
-        <div class="cell" onclick="cellClick(this)"></div>
-        <div class="cell" onclick="cellClick(this)"></div>
-        <div class="cell" onclick="cellClick(this)"></div>
-        <div class="cell" onclick="cellClick(this)"></div>
-        <div class="cell" onclick="cellClick(this)"></div>
-        <div class="cell" onclick="cellClick(this)"></div>
+    <div class="mostrarJogadorAtual">
+        <h3 class="jogadorAtual"></h3>
     </div>
 
-    <div class="side-panel-2">
-        <label for="player2" id="saida2">Jogador 2:</label>
-        <input type="text" id="player2" placeholder="Nome do Jogador 2">
-        <span id="player2-wins">Vitórias: 0</span>
-        <button onclick="cadastrarJogador(2)">Cadastrar</button>
+    <div class="container">
+        <div class="side-panel-1" id="side-panel-1">
+            <label for="player1" id="saida1">Jogador 1:</label>
+            <input type="text" id="player1" placeholder="Nome do Jogador 1">
+            <span id="player1-wins">Vitórias: 0</span>
+            <button onclick="cadastrarJogador(1)">Cadastrar</button>
+        </div>
+
+        <div id="game-board">
+            <div class="cell" onclick="cellClick(this)"></div>
+            <div class="cell" onclick="cellClick(this)"></div>
+            <div class="cell" onclick="cellClick(this)"></div>
+            <div class="cell" onclick="cellClick(this)"></div>
+            <div class="cell" onclick="cellClick(this)"></div>
+            <div class="cell" onclick="cellClick(this)"></div>
+            <div class="cell" onclick="cellClick(this)"></div>
+            <div class="cell" onclick="cellClick(this)"></div>
+            <div class="cell" onclick="cellClick(this)"></div>
+        </div>
+
+        <div class="side-panel-2" id="side-panel-2">
+            <label for="player2" id="saida2">Jogador 2:</label>
+            <input type="text" id="player2" placeholder="Nome do Jogador 2">
+            <span id="player2-wins">Vitórias: 0</span>
+            <button onclick="cadastrarJogador(2)">Cadastrar</button>
+        </div>
     </div>
-</div>
 
 </body>
 </html>
