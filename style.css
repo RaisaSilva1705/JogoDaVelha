@@ -1,9 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 100vh;
     background-color: #f7f7f7;
 }
@@ -16,14 +13,34 @@ body {
     margin: 0 auto;
 }
 
+.modoDeJogo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 300px;
+}
+
+.modoDeJogo button{
+    margin: 15px;
+}
+
+.mostrarJogadorAtual{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
 .side-panel-1{
     text-align: center;
     padding: 30px;
+    visibility: hidden;
 }
 
 .side-panel-2{
     text-align: center;
     padding: 30px;
+    visibility: hidden;
 }
 
 label {
