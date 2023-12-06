@@ -1,7 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
-    height: 100vh;
     background-color: #f7f7f7;
 }
 
@@ -17,7 +16,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 300px;
+    margin-top: 150px;
 }
 
 .modoDeJogo button{
@@ -79,4 +78,11 @@ button {
 #player1-wins, #player2-wins {
     display: block;
     margin-top: 5px;
+}
+
+.bottonReset{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 100px;
 }
