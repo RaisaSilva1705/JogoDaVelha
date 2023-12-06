@@ -21,7 +21,6 @@ function cadastrarJogador(player){
     mostrarJogadorAtual();
 }
 
-/* let jogoModo = 0; */
 let jogador2 = false;
 
 function ModoDeJogo(modoJogo){
