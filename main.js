@@ -63,38 +63,41 @@ function cellClick(cell, pos) { // posiciona o simbulo na cédula selecionada, a
             cell.innerText = currentPlayer;
             posiCell[pos] = currentPlayer;
 
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X'; // ? -> operador ternário
+
             mostrarJogadorAtual();
 
             permitirRobo = true;
 
-            checkWinner();  
+            checkWinner();
             checkEmpate();
-
+            
             // robo escolhe uma posição aleatória que não esteja ocupada
-            if (jogador2 == false && currentPlayer == 'X'){
+            if (jogador2 == false && currentPlayer == 'O'){
                 tabuleiro = document.querySelectorAll(".cell");
 
                 numPosiRobo = Math.floor(Math.random() * (8 - 0)) + 0;
                 validarPosi = tabuleiro[numPosiRobo];
-                
-                while(validarPosi.innerText !== ''){
+
+                while(validarPosi.innerText !== '' && permitirRobo == true){
                     numPosiRobo = Math.floor(Math.random() * (8 - 0)) + 0;
                     validarPosi = tabuleiro[numPosiRobo];
                 }
                 console.log(numPosiRobo);
             }
-
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X'; // ? -> operador ternário
             
             // robo joga na posição aleatória que tinha escolhido anteriormente
             if (permitirRobo == true && currentPlayer == 'O'){
                 setTimeout(() => {
-                    validarPosi.innerText = 'O';
+                    if (validarPosi.innerText == ''){
+                        validarPosi.innerText = 'O';
                     posiCell[numPosiRobo] = currentPlayer;
                     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
                     checkWinner();
+                    }
                 }, [500]);
             }
+            
         }
     }
     else{
@@ -138,9 +141,11 @@ function checkEmpate(){
             cellPreenchidos++;
     }
     if(cellPreenchidos == 9){
-        alert("Empate!");
+        //alert("Empate!");
+        document.getElementById('jogadorAtual').innerHTML = "Empate!";
         resetJogo();
         cellPreenchidos = 0;
+        permitirRobo = false;
     }
     return cellPreenchidos == posiCell.length;
 }
