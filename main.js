@@ -36,10 +36,10 @@ function ModoDeJogo(modoJogo){
         jogador.style.visibility = 'visible';
         document.getElementById("cadastro2").style.visibility = 'visible';
 
-        jogador2 = true // quando uma pessoa ira jogar
+        jogador2 = true; // quando uma pessoa ira jogar
     }
     if (modoJogo === 2){
-        saidaLabel.innerHTML = "Computador";
+        saidaLabel.innerHTML = "Computador | O";
 
         jogador.style.visibility = 'hidden';
         document.getElementById('cadastro2').style.visibility = 'hidden';
@@ -66,11 +66,16 @@ let currentPlayer = 'X';
 let tabuleiro = null;
 let validarPosi = null;
 
-function cellClick(cell, pos) {
+function cellClick(cell, pos) { // posiciona o simbulo na cédula selecionada, além de armazenar a jogada no array do tabuleiro e permitir que o robô jogue quando possível
     if (jogadorCadastrado == true){
+        console.log(pos);
         if (cell.innerText === '' && !checkWinner()){
             cell.innerText = currentPlayer;
             posiCell[pos] = currentPlayer;
+
+            mostrarJogadorAtual();
+
+            permitirRobo = true;
 
             checkWinner();  
             checkEmpate();
@@ -79,24 +84,27 @@ function cellClick(cell, pos) {
             if (jogador2 == false && currentPlayer == 'X'){
                 tabuleiro = document.querySelectorAll(".cell");
 
-                validarPosi = tabuleiro[Math.floor(Math.random() * (8 - 0)) + 0];
+                numPosiRobo = Math.floor(Math.random() * (8 - 0)) + 0;
+                validarPosi = tabuleiro[numPosiRobo];
                 
                 while(validarPosi.innerText !== ''){
-                    validarPosi = tabuleiro[Math.floor(Math.random() * (8 - 0)) + 0];
+                    numPosiRobo = Math.floor(Math.random() * (8 - 0)) + 0;
+                    validarPosi = tabuleiro[numPosiRobo];
+                    
                 }
+                console.log(numPosiRobo);
             }
 
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X'; // ? -> operador ternário
             
             // robo joga na posição aleatória que tinha escolhido anteriormente
             if (permitirRobo == true && currentPlayer == 'O'){
-                validarPosi.innerText = 'O';
-                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-                posiCell[pos] = currentPlayer;
-                console.log("2 if");
+                setTimeout(() => {
+                    validarPosi.innerText = 'O';
+                    posiCell[numPosiRobo] = currentPlayer;
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                }, [500]);
             }
-
-            mostrarJogadorAtual();
         }
     }
     else{
@@ -110,14 +118,14 @@ function resetPagina(){
 
 function resetJogo(){
     setTimeout(() => {
+        currentPlayer = 'X';
+        mostrarJogadorAtual();
         var limpar = document.querySelectorAll('.cell');
         for (var i = 0; i <= limpar.length; i++)
             limpar[i].innerText = '';
     }, [2000]);
     delete posiCell;
     posiCell = new Array(9);
-    permitirRobo = true;
-    
 }
 
 /* Fazer a verificação do vencedor.
@@ -156,7 +164,7 @@ function checkWinner(){
 function checkLinha(){
     for (var i = 0; i < 7; i += 3){
         if(posiCell[i] == 'X' && posiCell[i + 1] == 'X' && posiCell[i + 2] == 'X'){
-            contVitoria1++;
+            ++contVitoria1;
             document.getElementById('player1-wins').innerHTML = 'Vitórias: ' + contVitoria1;
 
             document.getElementById('jogadorAtual').innerHTML = "Vitória do Jogador 1!";
@@ -164,7 +172,7 @@ function checkLinha(){
             resetJogo();
         }
         if(posiCell[i] == 'O' && posiCell[i + 1] == 'O' && posiCell[i + 2] == 'O'){
-            contVitoria2++;
+            ++contVitoria2;
             document.getElementById('player2-wins').innerHTML = 'Vitórias: ' + contVitoria2;
 
             document.getElementById('jogadorAtual').innerHTML = "Vitória do Jogador 2!";
@@ -177,7 +185,7 @@ function checkLinha(){
 function checkColuna(){
     for (var i = 0; i < 3; ++i){
         if(posiCell[i] == 'X' && posiCell[i + 3] == 'X' && posiCell[i + 6] == 'X'){
-            contVitoria1++;
+            ++contVitoria1;
             document.getElementById('player1-wins').innerHTML = 'Vitórias: ' + contVitoria1;
 
             document.getElementById('jogadorAtual').innerHTML = "Vitória do Jogador 1!";
@@ -185,7 +193,7 @@ function checkColuna(){
             resetJogo();
         }
         if(posiCell[i] == 'O' && posiCell[i + 3] == 'O' && posiCell[i + 6] == 'O'){
-            contVitoria2++;
+            ++contVitoria2;
             document.getElementById('player2-wins').innerHTML = 'Vitórias: ' + contVitoria2;
 
             document.getElementById('jogadorAtual').innerHTML = "Vitória do Jogador 2!";
@@ -198,7 +206,7 @@ function checkColuna(){
 function checkDiagonal(){
     if((posiCell[0] == 'X' && posiCell[4] == 'X' && posiCell[8] == 'X') || (
         posiCell[2] == 'X' && posiCell[4] == 'X' && posiCell[6] == 'X')){
-        contVitoria1++;
+            ++contVitoria1;
         document.getElementById('player1-wins').innerHTML = 'Vitórias: ' + contVitoria1;
 
         document.getElementById('jogadorAtual').innerHTML = "Vitória do Jogador 1!";
@@ -207,7 +215,7 @@ function checkDiagonal(){
     }
     if((posiCell[0] == 'O' && posiCell[4] == 'O' && posiCell[8] == 'O') || (
         posiCell[2] == 'O' && posiCell[4] == 'O' && posiCell[6] == 'O')){
-        contVitoria2++;
+            ++contVitoria2;
         document.getElementById('player2-wins').innerHTML = 'Vitórias: ' + contVitoria2;
 
         document.getElementById('jogadorAtual').innerHTML = "Vitória do Jogador 2!";
