@@ -48,16 +48,6 @@ function ModoDeJogo(modoJogo){
     }
 }
 
-function jogoRobo(){
-    if (jogador2 == false){
-        var tabuleiro = document.querySelectorAll(".cell");
-        tabuleiro = tabuleiro[Math.floor(Math.random() * (8 - 0)) + 0];
-        
-        if (cell.innerText === '' && !checkWinner())
-            cellClick(tabuleiro);
-    }
-}
-
 function mostrarJogadorAtual(){
     document.getElementById('jogadorAtual').innerHTML = 'Jogador atual: ' + currentPlayer;
 }
@@ -90,7 +80,6 @@ function cellClick(cell, pos) { // posiciona o simbulo na cédula selecionada, a
                 while(validarPosi.innerText !== ''){
                     numPosiRobo = Math.floor(Math.random() * (8 - 0)) + 0;
                     validarPosi = tabuleiro[numPosiRobo];
-                    
                 }
                 console.log(numPosiRobo);
             }
@@ -103,6 +92,7 @@ function cellClick(cell, pos) { // posiciona o simbulo na cédula selecionada, a
                     validarPosi.innerText = 'O';
                     posiCell[numPosiRobo] = currentPlayer;
                     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                    checkWinner();
                 }, [500]);
             }
         }
