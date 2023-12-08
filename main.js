@@ -46,6 +46,8 @@ function ModoDeJogo(modoJogo){
 
         jogador2 = false; // quando o computador ira jogar
     }
+    
+    resetJogo();
 }
 
 function mostrarJogadorAtual(){
